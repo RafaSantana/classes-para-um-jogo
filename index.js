@@ -1,41 +1,30 @@
-class heroi {
+class Heroi {
     constructor(nome, idade, tipo) {
         this.nome = nome
         this.idade = idade
         this.tipo = tipo
     }
     atacar() {
-        this.ataque = this.tipo
-        switch (true) {
-            case this.ataque === "mago":
-                this.ataque = "magia"
-                break;
-            case this.ataque === "guerreiro":
-                this.ataque = "espada"
-                break;
-            case this.ataque === "monge":
-                this.ataque = "artes marciais"
-                break;
-            case this.ataque === "ninja":
-                this.ataque = "shuriken"
-                break;
-            default:
-                console.log("Opção invalida")
-                break;
+        const ataques = {
+            mago: "magia",
+            gerreiro: "espada",
+            monge: "artes marciais",
+            ninja: "shuriken",
         }
 
-        if ((this.tipo != "mago") && (this.tipo != "guerreiro") && (this.tipo != "monge") && (this.tipo != "ninja")) {
-
-            this.mensagemAtaque = console.log("Tipo de herói não disponível...")
-
+        if (this.tipo in ataques) {
+            const ataque = ataques[this.tipo]
+            console.log(`O ${this.tipo} atacou usando ${ataque}`)
         } else {
-            this.mensagemAtaque = console.log(`O ${this.tipo} atacou usando ${this.ataque}`)
+            throw new Error("Tipo de herói não disponível")
         }
-
-        return this.mensagemAtaque
     }
 }
 
-let heroiMago = new heroi("Veigar", 1000, "ninja")
 
-heroiMago.atacar()
+try {
+    let heroiMago = new Heroi("Veigar", 1200, "ninja")
+    heroiMago.atacar()
+} catch (error) {
+    console.error(error.message)
+}
